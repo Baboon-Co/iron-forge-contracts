@@ -49,7 +49,7 @@ jobs:
         run: |
           dotnet nuget push artifacts/client/*.nupkg \
             --source "https://nuget.pkg.github.com/nsmolianitski/index.json" \
-            --api-key ${GITHUB_TOKEN}
+            --api-key ${NUGET_AUTH_TOKEN}
 
   server:
     runs-on: ubuntu-latest
@@ -88,6 +88,6 @@ jobs:
         run: |
           dotnet nuget push artifacts/server/*.nupkg \
             --source "https://nuget.pkg.github.com/nsmolianitski/index.json" \
-            --api-key ${GITHUB_TOKEN}
+            --api-key ${NUGET_AUTH_TOKEN}
 
 # TODO: для других языков (go, java, ts…) заведите свои workflows generate-go.yml, generate-java.yml и т.д.
