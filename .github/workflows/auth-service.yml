@@ -1,0 +1,13 @@
+name: Generate ⭢ auth-service
+
+on:
+  push:
+    paths:
+      - 'protos/auth-service/**'
+
+jobs:
+  generate-csharp:
+    uses: ./.github/workflows/generate-csharp.yml
+    with:
+      service: auth-service
+      version: 0.0.1

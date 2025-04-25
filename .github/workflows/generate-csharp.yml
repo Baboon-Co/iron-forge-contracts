@@ -1,0 +1,93 @@
+name: Generate & Publish C# contracts
+on:
+  workflow_call:
+    inputs:
+      service:
+        description: 'Имя сервиса (папка в protos), напр. auth-service'
+        required: true
+        type: string
+      version:
+        description: 'Версия пакета, например 1.2.3'
+        required: true
+        type: string
+
+jobs:
+  client:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.x
+
+      - name: Restore & Build Client
+        run: |
+          dotnet restore src/csharp/Client.csproj \
+            /p:ProtoDir=protos \
+            /p:ServiceName=${{ inputs.service }} \
+            /p:Version=${{ inputs.version }}
+          dotnet build src/csharp/Client.csproj -c Release \
+            /p:ProtoDir=protos \
+            /p:ServiceName=${{ inputs.service }} \
+            /p:Version=${{ inputs.version }}
+
+      - name: Pack Client
+        run: |
+          dotnet pack src/csharp/Client.csproj \
+            --no-build -c Release \
+            -o artifacts/client \
+            /p:ProtoDir=protos \
+            /p:ServiceName=${{ inputs.service }} \
+            /p:Version=${{ inputs.version }}
+
+      - name: Publish Client to GitHub Packages
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dotnet nuget push artifacts/client/*.nupkg \
+            --source "github" \
+            --api-key "$NUGET_AUTH_TOKEN"
+
+  server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.x
+
+      - name: Restore & Build Server
+        run: |
+          dotnet restore src/csharp/Server.csproj \
+            /p:ProtoDir=protos \
+            /p:ServiceName=${{ inputs.service }} \
+            /p:Version=${{ inputs.version }}
+          dotnet build src/csharp/Server.csproj -c Release \
+            /p:ProtoDir=protos \
+            /p:ServiceName=${{ inputs.service }} \
+            /p:Version=${{ inputs.version }}
+
+      - name: Pack Server
+        run: |
+          dotnet pack src/csharp/Server.csproj \
+            --no-build -c Release \
+            -o artifacts/server \
+            /p:ProtoDir=protos \
+            /p:ServiceName=${{ inputs.service }} \
+            /p:Version=${{ inputs.version }}
+
+      - name: Publish Server to GitHub Packages
+        env:
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dotnet nuget push artifacts/server/*.nupkg \
+            --source "github" \
+            --api-key "$NUGET_AUTH_TOKEN"
+
+# TODO: для других языков (go, java, ts…) заведите свои workflows generate-go.yml, generate-java.yml и т.д.
