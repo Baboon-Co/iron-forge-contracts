@@ -8,7 +8,19 @@ on:
 
 jobs:
   generate-csharp:
-    uses: ./.github/workflows/generate-csharp.yml
-    with:
-      service: auth-service
-      version: 0.0.1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+    
+      - name: Bump version
+        id: versioning
+        uses: nsmolianitski/semver-action@v1.0.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+    
+      - uses: ./.github/workflows/generate-csharp.yml
+        with:
+          service: auth-service
+          version: ${{ steps.versioning.outputs.new_version }}
