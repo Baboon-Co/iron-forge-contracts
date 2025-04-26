@@ -24,7 +24,7 @@ jobs:
 
   generate-csharp:
     needs: bump-version
-    uses: iron-forge/iron-forge-contracts/.github/workflows/generate-csharp.yml@main
+    uses: baboon-co/iron-forge-contracts/.github/workflows/generate-csharp.yml@master
     with:
       service: auth-service
       version: ${{ needs.bump-version.outputs.version }}
