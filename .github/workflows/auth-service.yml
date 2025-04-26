@@ -20,7 +20,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
     
-      - uses: ./.github/workflows/generate-csharp.yml
+      - uses: baboon-co/iron-forge-contracts/.github/workflows/generate-csharp.yml@master
         with:
           service: auth-service
           version: ${{ steps.versioning.outputs.new_version }}
