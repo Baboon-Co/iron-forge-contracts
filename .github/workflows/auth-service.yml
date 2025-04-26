@@ -1,26 +1,30 @@
 name: Generate ⭢ auth-service
 
 on:
-  workflow_dispatch: # Allow running the workflow manually from the GitHub UI
+  workflow_dispatch:
   push:
     paths:
       - 'protos/auth-service/**'
 
 jobs:
-  generate-csharp:
+  bump-version:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.versioning.outputs.new_version }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-    
+
       - name: Bump version
         id: versioning
         uses: nsmolianitski/semver-action@v0.0.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-    
-      - uses: baboon-co/iron-forge-contracts/.github/workflows/generate-csharp.yml@master
-        with:
-          service: auth-service
-          version: ${{ steps.versioning.outputs.new_version }}
+
+  generate-csharp:
+    needs: bump-version
+    uses: iron-forge/iron-forge-contracts/.github/workflows/generate-csharp.yml@main
+    with:
+      service: auth-service
+      version: ${{ needs.bump-version.outputs.version }}
