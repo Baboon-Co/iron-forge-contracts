@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 		<PackageId>$(ServiceName).server</PackageId>
-		<Version>${Version}</Version>
+		<Version>$(Version)</Version>
 		<Authors>NSmolyanitsky</Authors>
     </PropertyGroup>
 
