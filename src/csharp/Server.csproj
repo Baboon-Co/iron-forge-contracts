@@ -4,7 +4,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-		<PackageId>$(ServiceName).Server</PackageId>
+		<PackageId>$(ServiceName).server</PackageId>
 		<Version>${Version}</Version>
 		<Authors>NSmolyanitsky</Authors>
     </PropertyGroup>

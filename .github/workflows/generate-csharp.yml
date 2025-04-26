@@ -12,11 +12,8 @@ on:
         type: string
 
 jobs:
-  client:
+  client-and-server:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -26,20 +23,21 @@ jobs:
         with:
           dotnet-version: 9.x
 
+      # Client
       - name: Restore & Build Client
         run: |
-          dotnet restore src/csharp/Client.csproj \
+          dotnet restore src/csharp/client.csproj \
             /p:ProtoDir=protos \
             /p:ServiceName=${{ inputs.service }} \
             /p:Version=${{ inputs.version }}
-          dotnet build src/csharp/Client.csproj -c Release \
+          dotnet build src/csharp/client.csproj -c Release \
             /p:ProtoDir=protos \
             /p:ServiceName=${{ inputs.service }} \
             /p:Version=${{ inputs.version }}
 
       - name: Pack Client
         run: |
-          dotnet pack src/csharp/Client.csproj \
+          dotnet pack src/csharp/client.csproj \
             --no-build -c Release \
             -o artifacts/client \
             /p:ProtoDir=protos \
@@ -54,31 +52,21 @@ jobs:
             --source "https://nuget.pkg.github.com/baboon-co/index.json" \
             --api-key ${NUGET_AUTH_TOKEN}
 
-  server:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
-      - name: Setup .NET 9
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 9.x
-
+      # Server
       - name: Restore & Build Server
         run: |
-          dotnet restore src/csharp/Server.csproj \
+          dotnet restore src/csharp/server.csproj \
             /p:ProtoDir=protos \
             /p:ServiceName=${{ inputs.service }} \
             /p:Version=${{ inputs.version }}
-          dotnet build src/csharp/Server.csproj -c Release \
+          dotnet build src/csharp/server.csproj -c Release \
             /p:ProtoDir=protos \
             /p:ServiceName=${{ inputs.service }} \
             /p:Version=${{ inputs.version }}
 
       - name: Pack Server
         run: |
-          dotnet pack src/csharp/Server.csproj \
+          dotnet pack src/csharp/server.csproj \
             --no-build -c Release \
             -o artifacts/server \
             /p:ProtoDir=protos \
