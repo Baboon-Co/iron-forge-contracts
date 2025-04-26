@@ -51,7 +51,7 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           dotnet nuget push artifacts/client/*.nupkg \
-            --source "https://nuget.pkg.github.com/nsmolianitski/index.json" \
+            --source "https://nuget.pkg.github.com/baboon-co/index.json" \
             --api-key ${NUGET_AUTH_TOKEN}
 
   server:
@@ -90,7 +90,7 @@ jobs:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           dotnet nuget push artifacts/server/*.nupkg \
-            --source "https://nuget.pkg.github.com/nsmolianitski/index.json" \
+            --source "https://nuget.pkg.github.com/baboon-co/index.json" \
             --api-key ${NUGET_AUTH_TOKEN}
 
 # TODO: для других языков (go, java, ts…) заведите свои workflows generate-go.yml, generate-java.yml и т.д.
