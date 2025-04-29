@@ -18,7 +18,7 @@ jobs:
 
       - name: Bump version
         id: versioning
-        uses: nsmolianitski/semver-action@v0.0.3
+        uses: nsmolianitski/semver-action@v1.1.2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -27,4 +27,4 @@ jobs:
     uses: ./.github/workflows/generate-csharp.yml
     with:
       service: auth-service
-      version: ${{ needs.bump-version.outputs.version }}
+      version: ${{ needs.bump-version.outputs.new_version_raw }}
