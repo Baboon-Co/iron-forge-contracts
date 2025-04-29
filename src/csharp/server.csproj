@@ -7,10 +7,11 @@
 		<PackageId>$(ServiceName).server</PackageId>
 		<Version>$(Version)</Version>
 		<Authors>NSmolyanitsky</Authors>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
-		<Protobuf Include="$(ProtoDir)/$(ServiceName)/*.proto" GrpcServices="Server" />
+		<Protobuf Include="../../$(ProtoDir)/$(ServiceName)/*.proto" GrpcServices="Server" />
     </ItemGroup>
 
     <ItemGroup>

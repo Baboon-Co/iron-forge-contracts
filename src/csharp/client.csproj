@@ -2,15 +2,14 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
 		<PackageId>$(ServiceName).client</PackageId>
 		<Version>$(Version)</Version>
 		<Authors>NSmolyanitsky</Authors>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
-		<Protobuf Include="$(ProtoDir)/$(ServiceName)/*.proto" GrpcServices="Client" />
+		<Protobuf Include="../../$(ProtoDir)/$(ServiceName)/*.proto" GrpcServices="Client" />
     </ItemGroup>
 
     <ItemGroup>
