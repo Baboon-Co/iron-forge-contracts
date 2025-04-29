@@ -10,7 +10,7 @@ jobs:
   bump-version:
     runs-on: ubuntu-latest
     outputs:
-      version: ${{ steps.versioning.outputs.new_version }}
+      version: ${{ steps.versioning.outputs.new_version_raw }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -27,4 +27,4 @@ jobs:
     uses: ./.github/workflows/generate-csharp.yml
     with:
       service: auth-service
-      version: ${{ needs.bump-version.outputs.new_version_raw }}
+      version: ${{ needs.bump-version.outputs.version }}
