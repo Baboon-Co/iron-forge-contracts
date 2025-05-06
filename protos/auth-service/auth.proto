@@ -9,7 +9,7 @@ package ironforge.auth;
 service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
   rpc Login (LoginRequest) returns (LoginResponse);
-  rpc RefreshToken (RefreshTokenRequest) returns (RefreshTokenResponse);
+  rpc RefreshTokens (RefreshTokensRequest) returns (RefreshTokensResponse);
 }
 
 message RegisterRequest {
@@ -37,12 +37,12 @@ message LoginResponse {
   google.protobuf.Timestamp refresh_token_expiration = 4;
 }
 
-message RefreshTokenRequest {
+message RefreshTokensRequest {
   string user_id = 1;
   string refresh_token = 2;
 }
 
-message RefreshTokenResponse {
+message RefreshTokensResponse {
   string access_token = 1;
   google.protobuf.Timestamp access_token_expiration = 2;
   string refresh_token = 3;
