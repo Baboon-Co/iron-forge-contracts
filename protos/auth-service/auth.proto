@@ -2,7 +2,9 @@ syntax = "proto3";
 
 option csharp_namespace = "IronForge.Contracts.AuthService";
 
-package auth;
+import "google/protobuf/timestamp.proto";
+
+package ironforge.auth;
 
 service Auth {
   rpc Register (RegisterRequest) returns (RegisterResponse);
@@ -11,7 +13,7 @@ service Auth {
 }
 
 message RegisterRequest {
-  string username = 1;
+  string user_id = 1;
   string login = 2;
   string password = 3;
 }
@@ -19,7 +21,9 @@ message RegisterRequest {
 message RegisterResponse {
   string userId = 1;
   string access_token = 2;
-  string refresh_token = 3;
+  google.protobuf.Timestamp access_token_expiration = 3;
+  string refresh_token = 4;
+  google.protobuf.Timestamp refresh_token_expiration = 5;
 }
 
 message LoginRequest {
@@ -29,7 +33,9 @@ message LoginRequest {
 
 message LoginResponse {
   string access_token = 1;
-  string refresh_token = 2;
+  google.protobuf.Timestamp access_token_expiration = 2;
+  string refresh_token = 3;
+  google.protobuf.Timestamp refresh_token_expiration = 4;
 }
 
 message RefreshTokenRequest {
@@ -38,5 +44,7 @@ message RefreshTokenRequest {
 
 message RefreshTokenResponse {
   string access_token = 1;
-  string refresh_token = 2;
+  google.protobuf.Timestamp access_token_expiration = 2;
+  string refresh_token = 3;
+  google.protobuf.Timestamp refresh_token_expiration = 4;
 }
