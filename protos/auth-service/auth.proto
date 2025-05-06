@@ -13,13 +13,12 @@ service Auth {
 }
 
 message RegisterRequest {
-  string user_id = 1;
   string login = 2;
   string password = 3;
 }
 
 message RegisterResponse {
-  string userId = 1;
+  string user_id = 1;
   string access_token = 2;
   google.protobuf.Timestamp access_token_expiration = 3;
   string refresh_token = 4;
@@ -39,7 +38,8 @@ message LoginResponse {
 }
 
 message RefreshTokenRequest {
-  string refresh_token = 1;
+  string user_id = 1;
+  string refresh_token = 2;
 }
 
 message RefreshTokenResponse {
