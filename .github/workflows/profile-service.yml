@@ -21,6 +21,7 @@ jobs:
         uses: nsmolianitski/semver-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          additional_name: profile-service
 
   generate-csharp:
     needs: bump-version
