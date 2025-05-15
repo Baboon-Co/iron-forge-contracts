@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-		<PackageId>$(ServiceName).client</PackageId>
+		<PackageId>BaboonCo.$(ServiceName).Client</PackageId>
 		<Version>$(Version)</Version>
 		<Authors>NSmolyanitsky</Authors>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
