@@ -5,7 +5,7 @@
 		<PackageId>BaboonCo.$(ServiceName).Client</PackageId>
 		<Version>$(Version)</Version>
 		<Authors>NSmolyanitsky</Authors>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <AssemblyName>BaboonCo.$(ServiceName).Client</AssemblyName>
     </PropertyGroup>
 
     <ItemGroup>
@@ -20,5 +20,4 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
     </ItemGroup>
-
 </Project>
