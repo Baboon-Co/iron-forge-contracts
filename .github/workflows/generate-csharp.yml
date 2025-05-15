@@ -3,11 +3,11 @@ on:
   workflow_call:
     inputs:
       service:
-        description: 'Имя сервиса (папка в protos), напр. auth-service'
+        description: 'Имя сервиса (и папка в protos). Пример: AuthService'
         required: true
         type: string
       version:
-        description: 'Версия пакета, например 1.2.3'
+        description: 'Версия пакета. Пример: 1.2.3'
         required: true
         type: string
 

@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'protos/profile-service/**'
+      - 'protos/ProfileService/**'
 
 jobs:
   bump-version:

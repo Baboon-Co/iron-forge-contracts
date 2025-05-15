@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'protos/auth-service/**'
+      - 'protos/AuthService/**'
 
 jobs:
   bump-version:
