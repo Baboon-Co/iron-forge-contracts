@@ -1,10 +1,10 @@
-name: Generate ⭢ auth-service
+﻿name: Generate ⭢ profile-service
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - 'protos/auth-service/**'
+      - 'protos/profile-service/**'
 
 jobs:
   bump-version:
@@ -21,11 +21,10 @@ jobs:
         uses: nsmolianitski/semver-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          additional_name: auth-service
 
   generate-csharp:
     needs: bump-version
     uses: ./.github/workflows/generate-csharp.yml
     with:
-      service: AuthService
+      service: ProfileService
       version: ${{ needs.bump-version.outputs.version }}

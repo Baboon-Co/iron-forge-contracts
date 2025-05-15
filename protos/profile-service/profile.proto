@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option csharp_namespace = "IronForge.Contracts.ProfileService";
+
+import "google/protobuf/timestamp.proto";
+
+package ironforge.profile;
+
+service Profile {
+  rpc CreateProfile (CreateProfileRequest) returns (CreateProfileResponse);
+}
+
+message CreateProfileRequest {
+  string user_id = 1;
+  string nickname = 2;
+}
+
+message CreateProfileResponse {
+}
