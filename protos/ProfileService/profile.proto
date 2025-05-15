@@ -7,7 +7,17 @@ import "google/protobuf/timestamp.proto";
 package ironforge.profile;
 
 service Profile {
+  rpc GetProfile (GetProfileRequest) returns (GetProfileResponse);
   rpc CreateProfile (CreateProfileRequest) returns (CreateProfileResponse);
+}
+
+message GetProfileRequest {
+  string nickname = 1;
+}
+
+message GetProfileResponse {
+  int32 wins = 1;
+  int32 losses = 2;
 }
 
 message CreateProfileRequest {
